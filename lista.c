@@ -3,7 +3,7 @@
 
 typedef struct elemento{
 	int dado;
-	elemento* proximo;
+	struct elemento* proximo;
 } t_elemento;
 
 typedef struct lista{
@@ -16,7 +16,7 @@ int insereinicio(int valor, t_lista* l){
 
 	nv = (t_elemento*)malloc(sizeof(t_elemento)); 
 	nv -> dado = valor;
-	nv -> proximo = l -> inicio;
+	nv -> proximo = l->inicio;
 	l -> inicio = nv;
 	if(l -> fim == NULL){
 		l -> fim = nv;
@@ -25,12 +25,12 @@ int insereinicio(int valor, t_lista* l){
 }
 
 int inserefim(int valor, t_lista* l){
-	t_elemento nv;
+	t_elemento* nv;
 
 	nv = (t_elemento*)malloc(sizeof(t_elemento));
 	nv -> dado = valor;
 	l -> fim = nv;
-	if(l -> incio == NULL){
+	if(l -> inicio == NULL){
 		l -> inicio = nv; 
 	}
 	return 0;
@@ -38,9 +38,6 @@ int inserefim(int valor, t_lista* l){
 
 
 int main(){
-	t_lista teste;
-
-	printf("%c\n", t_lista.inicio);
 	
 	return 0;
 }
