@@ -24,10 +24,23 @@ int insereinicio(int valor, t_lista* l){
 	return 0;
 }
 
+int inserefim(int valor, t_lista* l){
+	t_elemento nv;
+
+	nv = (t_elemento*)malloc(sizeof(t_elemento));
+	nv -> dado = valor;
+	l -> fim = nv;
+	if(l -> incio == NULL){
+		l -> inicio = nv; 
+	}
+	return 0;
+}
+
 
 int main(){
 	t_lista teste;
 
+	printf("%c\n", t_lista.inicio);
 	
 	return 0;
 }
