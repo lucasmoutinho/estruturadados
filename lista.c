@@ -58,16 +58,48 @@ void mostralista(t_lista* l){
 	printf("Fim da lista\n");
 }
 
+void crialista(t_lista* l){
+	int valor;
+	char continua, onde;
+
+	printf("Deseja inserir algo na lista? (S/N)\n");
+	scanf("%c", &continua);
+	getchar();
+	while(continua != 'S' && continua != 's' && continua != 'n' && continua != 'N'){
+		printf("Caractere invalido, insira outro\n");
+		scanf(" %c", &continua);
+		getchar();
+	}
+	while(continua == 'S' || continua == 's'){
+		printf("Insira o valor inteiro que deseja inserir\n");
+		scanf("%d", &valor);
+		printf("Deseja inserir no inicio ou no fim da lista?\n Inicio (i), Final(f)\n");
+		scanf(" %c", &onde);
+		getchar();
+		while(onde != 'I' && onde != 'i' && onde != 'F' && onde != 'f'){
+			printf("Caractere invalido, insira outro\n");
+			scanf(" %c", &onde);
+			getchar();
+		}
+		if(onde == 'i' || onde == 'I'){
+			insereinicio(valor, l);
+		}
+		else{
+			inserefim(valor, l);
+		}
+		printf("Deseja inserir algo a mais na lista? (S/N)\n");
+		scanf(" %c", &continua);
+		getchar();
+	}
+}
+
 
 int main(){
 	t_lista teste;
 
 	teste.inicio = NULL;
 	teste.fim = NULL;
-	insereinicio(10, &teste);
-	insereinicio(20,&teste);
-	inserefim(5, &teste);
-	inserefim(1, &teste);
+	crialista(&teste);
 	mostralista(&teste);
 
 	return 0;
