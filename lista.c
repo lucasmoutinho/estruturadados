@@ -181,7 +181,8 @@ void crialista(t_lista* l){
 		getchar();
 	}
 }
-
+	
+/*TESTANDO*/
 
 int main(){
 	t_lista teste;
