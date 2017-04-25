@@ -107,6 +107,65 @@ void mostralista(t_lista* l){
 	printf("Fim da lista\n");
 }
 
+int inserequalquer(int valor, t_lista* l, int pos){
+	t_elemento* nv = (t_elemento*)malloc(sizeof(t_elemento));
+	t_elemento* atual = l->inicio;
+	t_elemento* ant = NULL;
+	int i = 0;
+	
+	if(atual == NULL){
+		if(pos == 0){
+			nv->dado = valor;
+			nv->proximo = NULL;
+			l->inicio = nv;
+			l->fim = nv;
+			return 0;
+		}
+		else{
+			printf("Posicao invalida\n");
+			return -1;
+		}
+	}
+	while(i != pos && atual->proximo != NULL){
+		ant = atual;
+		atual = atual->proximo;
+		i++;
+	}
+	if (i == pos){
+		nv->dado = valor;
+		nv->proximo = atual;
+		if(atual->proximo == NULL){
+			l->fim = nv;
+			if(ant == NULL){
+				l->inicio = nv;
+			}
+			else{
+				ant->proximo = nv;
+			}
+		}
+		else{
+			ant->proximo = nv;
+		}
+		return 0;
+	}
+	else if (i == pos-1){
+		nv->dado = valor;
+		nv->proximo = NULL;
+		l->fim = nv;
+		if(ant == NULL){
+				l->inicio = nv;
+		}
+		else{
+			ant->proximo = nv;
+		}
+		return 0;
+	}
+	else{
+		printf("Posicao invalida\n");
+		return -1;
+	}
+}
+
 void crialista(t_lista* l){
 	int valor, tmp, pos;
 	char continua, onde;
@@ -140,7 +199,7 @@ void crialista(t_lista* l){
 			printf("Qual posicao?\n");
 			scanf("%d", &pos);
 			getchar();
-			/*Colocar insere qualquer aqui*/
+			inserequalquer(valor, l, pos);
 		}
 		printf("Deseja inserir algo a mais na lista? (S/N)\n");
 		scanf(" %c", &continua);
