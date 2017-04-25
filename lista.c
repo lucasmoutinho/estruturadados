@@ -63,6 +63,31 @@ int removeinicio(t_lista* l){
 	return tmp;
 }
 
+int removefim(t_lista* l){
+	if(estavazia(l)){
+		printf("Lista vazia\n");
+		return -1;
+	}
+	t_elemento* ultimo = l -> inicio;
+	t_elemento* penultimo = NULL;
+	int tmp = l -> fim -> dado;
+
+	while(ultimo -> proximo != NULL){
+		penultimo = ultimo;
+		ultimo = ultimo -> proximo;
+	}
+	if(penultimo != NULL){
+		penultimo -> proximo = NULL;
+		l -> fim = penultimo;
+	}
+	else{
+		l -> fim = NULL;
+		l -> inicio = NULL;
+	}
+	free(ultimo);
+	return tmp;
+}
+
 void mostralista(t_lista* l){
 	if(l -> inicio == NULL){
 		printf("Lista vazia\n");
