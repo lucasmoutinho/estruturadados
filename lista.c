@@ -29,15 +29,46 @@ int inserefim(int valor, t_lista* l){
 
 	nv = (t_elemento*)malloc(sizeof(t_elemento));
 	nv -> dado = valor;
-	l -> fim = nv;
+	nv -> proximo = NULL;
 	if(l -> inicio == NULL){
 		l -> inicio = nv; 
 	}
+	else{
+		l -> fim -> proximo = nv;
+	}
+	l -> fim = nv;
 	return 0;
+}
+
+void mostralista(t_lista* l){
+	if(l -> inicio == NULL){
+		printf("Lista vazia\n");
+	}
+	else{
+		t_elemento* p;
+		int i = 0;
+
+		p = l -> inicio;
+		while(p != NULL){
+			printf("Posicao %d --- valor %d\n", i, p->dado);
+			p = p -> proximo;
+			i++;
+		}
+	}
+	printf("Fim da lista\n");
 }
 
 
 int main(){
-	
+	t_lista teste;
+
+	teste.inicio = NULL;
+	teste.fim = NULL;
+	insereinicio(10, &teste);
+	insereinicio(20,&teste);
+	inserefim(5, &teste);
+	inserefim(1, &teste);
+	mostralista(&teste);
+
 	return 0;
 }
