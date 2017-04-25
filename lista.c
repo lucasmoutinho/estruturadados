@@ -40,6 +40,29 @@ int inserefim(int valor, t_lista* l){
 	return 0;
 }
 
+int estavazia(t_lista* l){
+	if(l -> inicio == NULL){
+		return 1;
+	}
+	return 0;
+}
+
+int removeinicio(t_lista* l){
+	if(estavazia(l)){
+		printf("Lista vazia\n");
+		return -1;
+	}
+	t_elemento* p = l -> inicio;
+	int tmp = p -> dado;
+
+	l -> inicio = p -> proximo;
+	free(p);
+	if(l -> inicio == NULL){
+		l -> fim = NULL;
+	}
+	return tmp;
+}
+
 void mostralista(t_lista* l){
 	if(l -> inicio == NULL){
 		printf("Lista vazia\n");
@@ -73,7 +96,7 @@ void crialista(t_lista* l){
 	while(continua == 'S' || continua == 's'){
 		printf("Insira o valor inteiro que deseja inserir\n");
 		scanf("%d", &valor);
-		printf("Deseja inserir no inicio ou no fim da lista?\n Inicio (i), Final(f)\n");
+		printf("Deseja inserir no inicio ou no fim da lista?\nInicio (i), Final(f)\n");
 		scanf(" %c", &onde);
 		getchar();
 		while(onde != 'I' && onde != 'i' && onde != 'F' && onde != 'f'){
