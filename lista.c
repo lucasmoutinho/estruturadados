@@ -107,7 +107,7 @@ void mostralista(t_lista* l){
 }
 
 void crialista(t_lista* l){
-	int valor;
+	int valor, tmp;
 	char continua, onde;
 
 	printf("Deseja inserir algo na lista? (S/N)\n");
@@ -157,11 +157,12 @@ void crialista(t_lista* l){
 			getchar();
 		}
 		if(onde == 'i' || onde == 'I'){
-			removeinicio(l);
+			tmp = removeinicio(l);
 		}
 		else{
-			removefim(l);
+			tmp = removefim(l);
 		}
+		printf("removido valor %d\n", tmp);
 		printf("Deseja remover algo a mais na lista? (S/N)\n");
 		scanf(" %c", &continua);
 		getchar();
