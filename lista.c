@@ -88,6 +88,7 @@ int removefim(t_lista* l){
 	return tmp;
 }
 
+
 void mostralista(t_lista* l){
 	if(l -> inicio == NULL){
 		printf("Lista vazia\n");
@@ -107,7 +108,7 @@ void mostralista(t_lista* l){
 }
 
 void crialista(t_lista* l){
-	int valor, tmp;
+	int valor, tmp, pos;
 	char continua, onde;
 
 	printf("Deseja inserir algo na lista? (S/N)\n");
@@ -121,10 +122,10 @@ void crialista(t_lista* l){
 	while(continua == 'S' || continua == 's'){
 		printf("Insira o valor inteiro que deseja inserir\n");
 		scanf("%d", &valor);
-		printf("Deseja inserir no inicio ou no fim da lista?\nInicio (i), Final(f)\n");
+		printf("Deseja inserir no inicio ou no fim da lista?\nInicio (i), Final(f), Qualquer lugar(Q)\n");
 		scanf(" %c", &onde);
 		getchar();
-		while(onde != 'I' && onde != 'i' && onde != 'F' && onde != 'f'){
+		while(onde != 'I' && onde != 'i' && onde != 'F' && onde != 'f' && onde != 'Q' && onde != 'q'){
 			printf("Caractere invalido, insira outro\n");
 			scanf(" %c", &onde);
 			getchar();
@@ -132,8 +133,14 @@ void crialista(t_lista* l){
 		if(onde == 'i' || onde == 'I'){
 			insereinicio(valor, l);
 		}
-		else{
+		else if(onde == 'F' || onde == 'f'){
 			inserefim(valor, l);
+		}
+		else{
+			printf("Qual posicao?\n");
+			scanf("%d", &pos);
+			getchar();
+			/*Colocar insere qualquer aqui*/
 		}
 		printf("Deseja inserir algo a mais na lista? (S/N)\n");
 		scanf(" %c", &continua);
@@ -148,10 +155,10 @@ void crialista(t_lista* l){
 		getchar();
 	}
 	while(continua == 'S' || continua == 's'){
-		printf("Deseja remover no inicio ou no fim da lista?\nInicio (i), Final(f)\n");
+		printf("Deseja remover no inicio ou no fim da lista?\nInicio (i), Final(f), Qualquer lugar(Q)\n");
 		scanf(" %c", &onde);
 		getchar();
-		while(onde != 'I' && onde != 'i' && onde != 'F' && onde != 'f'){
+		while(onde != 'I' && onde != 'i' && onde != 'F' && onde != 'f'&& onde != 'Q' && onde != 'q'){
 			printf("Caractere invalido, insira outro\n");
 			scanf(" %c", &onde);
 			getchar();
@@ -159,8 +166,14 @@ void crialista(t_lista* l){
 		if(onde == 'i' || onde == 'I'){
 			tmp = removeinicio(l);
 		}
-		else{
+		else if(onde == 'F' || onde == 'f'){
 			tmp = removefim(l);
+		}
+		else{
+			printf("Qual posicao?\n");
+			scanf("%d", &pos);
+			getchar();
+			/*COlocar remove qualquer aqui*/
 		}
 		printf("removido valor %d\n", tmp);
 		printf("Deseja remover algo a mais na lista? (S/N)\n");
