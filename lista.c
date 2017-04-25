@@ -139,6 +139,33 @@ void crialista(t_lista* l){
 		scanf(" %c", &continua);
 		getchar();
 	}
+	printf("Deseja remover algo na lista? (S/N)\n");
+	scanf(" %c", &continua);
+	getchar();
+	while(continua != 'S' && continua != 's' && continua != 'n' && continua != 'N'){
+		printf("Caractere invalido, insira outro\n");
+		scanf(" %c", &continua);
+		getchar();
+	}
+	while(continua == 'S' || continua == 's'){
+		printf("Deseja remover no inicio ou no fim da lista?\nInicio (i), Final(f)\n");
+		scanf(" %c", &onde);
+		getchar();
+		while(onde != 'I' && onde != 'i' && onde != 'F' && onde != 'f'){
+			printf("Caractere invalido, insira outro\n");
+			scanf(" %c", &onde);
+			getchar();
+		}
+		if(onde == 'i' || onde == 'I'){
+			removeinicio(l);
+		}
+		else{
+			removefim(l);
+		}
+		printf("Deseja remover algo a mais na lista? (S/N)\n");
+		scanf(" %c", &continua);
+		getchar();
+	}
 }
 
 
