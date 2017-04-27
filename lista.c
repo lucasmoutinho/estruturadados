@@ -188,6 +188,7 @@ void removetudo(t_lista* l){
 		tmp = removeinicio(l);
 		printf("Removido %d da posicao 0\n", tmp);
 	}
+	printf("Lista vazia\n");
 }
 
 void crialista(t_lista* l){
