@@ -146,6 +146,41 @@ int inserequalquer(int valor, t_lista* l, int pos){
 	return 0;
 }
 
+int removequalquer(t_lista* l, int pos){
+	int valor, i = 0;
+
+	if(estavazia(l)){
+		printf("Lista vazia\n");
+		return -1;
+	}
+	else if(pos == 0){
+		valor = removeinicio(l);
+		return valor;
+	}
+
+	t_elemento* ultimo = l->inicio;
+	t_elemento* penultimo = NULL;
+
+	while(i!=pos && ultimo->proximo != NULL){
+		penultimo = ultimo;
+		ultimo = ultimo->proximo;
+		i++;
+	}
+	if(pos==i){
+		penultimo->proximo = ultimo->proximo;
+		valor = ultimo->dado;
+		if(penultimo->proximo == NULL){
+			l->fim = penultimo;
+		}
+		free(ultimo);
+	}
+	else{
+		printf("Posicao invalida\n");
+		return -1;
+	}
+	return valor;
+}
+
 void crialista(t_lista* l){
 	int valor, tmp, pos;
 	char continua, onde;
@@ -212,16 +247,16 @@ void crialista(t_lista* l){
 			printf("Qual posicao?\n");
 			scanf("%d", &pos);
 			getchar();
-			/*COlocar remove qualquer aqui*/
+			tmp = removequalquer(l, pos);
 		}
-		printf("removido valor %d\n", tmp);
+		if(tmp != -1){
+			printf("removido valor %d\n", tmp);
+		}
 		printf("Deseja remover algo a mais na lista? (S/N)\n");
 		scanf(" %c", &continua);
 		getchar();
 	}
 }
-	
-/*TESTANDO*/
 
 int main(){
 	t_lista teste;
