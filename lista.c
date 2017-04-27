@@ -191,7 +191,14 @@ void removetudo(t_lista* l){
 	printf("Lista vazia\n");
 }
 
-void crialista(t_lista* l){
+t_lista* crialista(){
+	t_lista* l = (t_lista*)malloc(sizeof(t_lista));
+	l->inicio=NULL;
+	l->fim=NULL;
+	return l;
+}
+
+void pergunta(t_lista* l){
 	int valor, tmp, pos;
 	char continua, onde;
 
@@ -273,12 +280,11 @@ void crialista(t_lista* l){
 }
 
 int main(){
-	t_lista teste;
+	t_lista* l;
 
-	teste.inicio = NULL;
-	teste.fim = NULL;
-	crialista(&teste);
-	mostralista(&teste);
+	l = crialista();
+	pergunta(l);
+	mostralista(l);
 
 	return 0;
 }
