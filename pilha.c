@@ -232,6 +232,15 @@ void desempilharTudo(t_pilha*p){
 	}
 }
 
+void mostraPilha(t_pilha* p){
+	if(p->l->inicio == NULL){
+		printf("Pilha vaiza\n");
+	}
+	else{
+		mostralista(p->l);
+	}
+}
+
 /*FIM ALGORITMO PILHAS*/
 
 /*ALGORITMO FILAS*/
@@ -259,6 +268,15 @@ void desenfileiraTudo(t_fila* f){
 	}
 }
 
+void mostraFila(t_fila* f){
+	if(f->l->inicio == NULL){
+		printf("Fila vaiza\n");
+	}
+	else{
+		mostralista(f->l);
+	}
+}
+
 /*FIM ALGORITMO FILAS*/
 
 /*ALGORITMO DEQUES*/
@@ -271,6 +289,59 @@ void desenfileiraTudo(t_fila* f){
 /*MAIN*/
 
 int main(){
+	t_fila* fila;
+	t_pilha* pilha;
+	t_lista* lista;
+
+	enfileira(1,fila);
+	enfileira(2,fila);
+	enfileira(3,fila);
+	enfileira(4,fila);
+	enfileira(5,fila);
+	enfileira(6,fila);
+
+	mostraFila(fila);
+
+	desenfileira(fila);
+	desenfileira(fila);
+	desenfileira(fila);
+	desenfileira(fila);
+	desenfileira(fila);
+	desenfileira(fila);
+
+	enfileira(1,fila);
+	enfileira(2,fila);
+	enfileira(3,fila);
+	enfileira(4,fila);
+	enfileira(5,fila);
+	enfileira(6,fila);
+
+	desenfileiraTudo(fila);
+
+	empilhar(1, pilha);
+	empilhar(2, pilha);
+	empilhar(3, pilha);
+	empilhar(4, pilha);
+	empilhar(5, pilha);
+	empilhar(6, pilha);
+
+	mostraPilha(pilha);
+
+	desempilhar(pilha);
+	desempilhar(pilha);
+	desempilhar(pilha);
+	desempilhar(pilha);
+	desempilhar(pilha);
+	desempilhar(pilha);
+
+	empilhar(1, pilha);
+	empilhar(2, pilha);
+	empilhar(3, pilha);
+	empilhar(4, pilha);
+	empilhar(5, pilha);
+	empilhar(6, pilha);
+
+	desempilharTudo(pilha);
 
 	return 0;
 }
