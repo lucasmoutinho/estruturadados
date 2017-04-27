@@ -181,6 +181,15 @@ int removequalquer(t_lista* l, int pos){
 	return valor;
 }
 
+void removetudo(t_lista* l){
+	int tmp;
+
+	while(l->inicio != NULL){
+		tmp = removeinicio(l);
+		printf("Removido %d da posicao 0\n", tmp);
+	}
+}
+
 void crialista(t_lista* l){
 	int valor, tmp, pos;
 	char continua, onde;
@@ -229,10 +238,10 @@ void crialista(t_lista* l){
 		getchar();
 	}
 	while(continua == 'S' || continua == 's'){
-		printf("Deseja remover no inicio ou no fim da lista?\nInicio (i), Final(f), Qualquer lugar(Q)\n");
+		printf("Deseja remover no inicio ou no fim da lista?\nInicio (i), Final(f), Qualquer lugar(Q) ou Tudo(T)\n");
 		scanf(" %c", &onde);
 		getchar();
-		while(onde != 'I' && onde != 'i' && onde != 'F' && onde != 'f'&& onde != 'Q' && onde != 'q'){
+		while(onde != 'I' && onde != 'i' && onde != 'F' && onde != 'f'&& onde != 'Q' && onde != 'q' && onde != 'T' && onde !='t'){
 			printf("Caractere invalido, insira outro\n");
 			scanf(" %c", &onde);
 			getchar();
@@ -243,11 +252,15 @@ void crialista(t_lista* l){
 		else if(onde == 'F' || onde == 'f'){
 			tmp = removefim(l);
 		}
-		else{
+		else if(onde == 'Q' || onde == 'q'){
 			printf("Qual posicao?\n");
 			scanf("%d", &pos);
 			getchar();
 			tmp = removequalquer(l, pos);
+		}
+		else{
+			removetudo(l);
+			tmp = -1;
 		}
 		if(tmp != -1){
 			printf("removido valor %d\n", tmp);
