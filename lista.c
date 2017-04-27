@@ -108,62 +108,42 @@ void mostralista(t_lista* l){
 }
 
 int inserequalquer(int valor, t_lista* l, int pos){
-	t_elemento* nv = (t_elemento*)malloc(sizeof(t_elemento));
-	t_elemento* atual = l->inicio;
-	t_elemento* ant = NULL;
-	int i = 0;
 	
-	if(atual == NULL){
-		if(pos == 0){
-			nv->dado = valor;
-			nv->proximo = NULL;
-			l->inicio = nv;
-			l->fim = nv;
-			return 0;
-		}
-		else{
-			printf("Posicao invalida\n");
-			return -1;
-		}
-	}
-	while(i != pos && atual->proximo != NULL){
-		ant = atual;
-		atual = atual->proximo;
-		i++;
-	}
-	if (i == pos){
-		nv->dado = valor;
-		nv->proximo = atual;
-		if(atual->proximo == NULL){
-			l->fim = nv;
-			if(ant == NULL){
-				l->inicio = nv;
-			}
-			else{
-				ant->proximo = nv;
-			}
-		}
-		else{
-			ant->proximo = nv;
-		}
+	if (pos == 0){
+		insereinicio(valor, l);
 		return 0;
 	}
-	else if (i == pos-1){
-		nv->dado = valor;
-		nv->proximo = NULL;
-		l->fim = nv;
-		if(ant == NULL){
-				l->inicio = nv;
-		}
-		else{
-			ant->proximo = nv;
-		}
-		return 0;
-	}
-	else{
+	else if( l->inicio == NULL){
 		printf("Posicao invalida\n");
 		return -1;
 	}
+
+	t_elemento* nv = (t_elemento*)malloc(sizeof(t_elemento));
+	t_elemento* ultimo = l->inicio;
+	t_elemento* penultimo = NULL;
+	int i = 0;
+
+	nv->dado = valor;
+	while(i!=pos && ultimo->proximo != NULL){
+		penultimo = ultimo;
+		ultimo = ultimo->proximo;
+		i++;
+	}
+	if(pos==i+1){
+		nv->proximo=NULL;
+		ultimo->proximo=nv;
+		l->fim=nv;
+	}
+	else if(pos==i){
+		penultimo->proximo=nv;
+		nv->proximo=ultimo;
+	}
+	else{
+		printf("Posicao invalida\n");
+		free(nv);
+		return -1;
+	}
+	return 0;
 }
 
 void crialista(t_lista* l){
