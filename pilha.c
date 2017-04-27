@@ -223,12 +223,12 @@ int desempilhar(t_pilha* p){
 	return removeinicio(p->l);
 }
 
-void desempilhartudo(t_pilha*p){
+void desempilharTudo(t_pilha*p){
 	int tmp;
 
 	while(p->l->inicio != NULL){
 		tmp = removeinicio(p->l);
-		printf("Removido %d", tmp);
+		printf("Removido %d\n", tmp);
 	}
 }
 
@@ -236,9 +236,28 @@ void desempilhartudo(t_pilha*p){
 
 /*ALGORITMO FILAS*/
 
+t_fila* criafila(){
+	t_fila* f = (t_fila*)malloc(sizeof(t_fila));
+	f->l = crialista();
+	return f;
+}
 
+void enfileira(int valor, t_fila* f){
+	insereinicio(valor, f->l);
+}
 
+int desenfileira(t_fila* f){
+	return removefim(f->l);
+}
 
+void desenfileiraTudo(t_fila* f){
+	int tmp;
+
+	while(f->l->inicio!= NULL){
+		tmp = removefim(f->l);
+		printf("Removido %d\n", tmp);
+	}
+}
 
 /*FIM ALGORITMO FILAS*/
 
