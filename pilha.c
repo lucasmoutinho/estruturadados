@@ -215,7 +215,22 @@ t_pilha* criapilha(){
 	return p;
 }
 
+void empilhar(int valor, t_pilha* p){
+	insereinicio(valor, p->l);
+}
 
+int desempilhar(t_pilha* p){
+	return removeinicio(p->l);
+}
+
+void desempilhartudo(t_pilha*p){
+	int tmp;
+
+	while(p->l->inicio != NULL){
+		tmp = removeinicio(p->l);
+		printf("Removido %d", tmp);
+	}
+}
 
 /*FIM ALGORITMO PILHAS*/
 
