@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 typedef struct elemento{
 	int dado;
 	struct elemento* proximo;
@@ -205,7 +208,7 @@ t_lista* crialista(){
 	return l;
 }
 
-/*FIM ALGORITMO LISTAS/
+/*FIM ALGORITMO LISTAS*/
 
 /*ALGORITMO PILHAS*/
 
@@ -234,7 +237,7 @@ void desempilharTudo(t_pilha*p){
 
 void mostraPilha(t_pilha* p){
 	if(p->l->inicio == NULL){
-		printf("Pilha vaiza\n");
+		printf("Pilha vazia\n");
 	}
 	else{
 		mostralista(p->l);
@@ -270,7 +273,7 @@ void desenfileiraTudo(t_fila* f){
 
 void mostraFila(t_fila* f){
 	if(f->l->inicio == NULL){
-		printf("Fila vaiza\n");
+		printf("Fila vazia\n");
 	}
 	else{
 		mostralista(f->l);
@@ -291,7 +294,9 @@ void mostraFila(t_fila* f){
 int main(){
 	t_fila* fila;
 	t_pilha* pilha;
-	t_lista* lista;
+
+	fila = criafila();
+	pilha = criapilha();
 
 	enfileira(1,fila);
 	enfileira(2,fila);
