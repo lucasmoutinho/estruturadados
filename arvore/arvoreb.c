@@ -235,6 +235,22 @@ int alturaArvore(t_no* r){
 	return hd+1;
 }
 
+int arvoreIguais(t_no* r1, t_no* r2){
+	if (r1 == r2){
+		return 1;
+	}
+	if((r1 == NULL && r2 != NULL) || (r1 != NULL && r2 == NULL)){
+		return 0;
+	}
+	if(r1->raiz != r2->raiz){
+		return 0;
+	}
+	if(!arvoreIguais(r1->esq, r2->esq) || !arvoreIguais(r1->dir, r2->dir)){
+		return 0;
+	}
+	return 1;
+}
+
 /*FIM ALGORITMOS DE ARVORE*/
 
 int main(){
@@ -270,7 +286,25 @@ int main(){
 	else{
 		printf("No com valor %d encontrado\n", arvore2->raiz);
 	}
+	printf("Qual a raiz da segunda arvore binaria de busca que deseja criar?\n");
+	scanf("%d", &raiz);
+	arvore2 = criaArvore(raiz);
+	printf("Deseja inserir algum valor? (0 caso nao)\n");
+	scanf("%d", &raiz);
+	while(raiz!=0){
+		insereArvore(raiz, arvore2);
+		printf("Deseja inserir algum valor? (0 caso nao)\n");
+		scanf("%d", &raiz);
+	}
+	if (arvoreIguais(arvore, arvore2)){
+		printf("Arvores iguais\n");
+	}
+	else{
+		printf("Arvores distintas\n");
+	}
 	removeArvore(&arvore);
+	removeArvore(&arvore2);
 	percursoLargura(arvore);
+	percursoLargura(arvore2);
 	return 0;
 }
