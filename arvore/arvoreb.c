@@ -156,7 +156,16 @@ int percursoLargura(t_no* r){
 			enfileira(no_atual->dir, f);
 		}
 	}
-	printf("\n");
+	return 0;
+}
+
+int percursoPre(t_no* r){
+	if (r == NULL){
+		return 0;
+	}
+	printf("%d ", r->raiz);
+	percursoPre(r->esq);
+	percursoPre(r->dir);
 	return 0;
 }
 
@@ -177,5 +186,6 @@ int main(){
 		scanf("%d", &raiz);
 	}
 	mostraArvore(arvore);
+	printf("\n");
 	return 0;
 }
