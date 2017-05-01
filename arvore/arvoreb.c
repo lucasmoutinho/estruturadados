@@ -137,7 +137,7 @@ int insereArvore(int v, t_no* r){
 	return 0;
 }
 
-int mostraArvore(t_no* r){
+int percursoLargura(t_no* r){
 	if(r == NULL){
 		printf("Arvore vazia\n");
 		return -1;
