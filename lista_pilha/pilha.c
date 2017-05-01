@@ -271,11 +271,11 @@ void desenfileiraTudo(t_fila* f){
 	}
 }
 
-void filavazia(t_fila* f){
+int filavazia(t_fila* f){
 	if(f->l->inicio == NULL){
 		return 1;
 	}
-	return 0
+	return 0;
 }
 
 void mostraFila(t_fila* f){

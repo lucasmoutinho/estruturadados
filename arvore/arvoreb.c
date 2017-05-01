@@ -3,8 +3,8 @@
 
 typedef struct no{
 	int raiz;
-	no* esq;
-	no* dir;	
+	struct no* esq;
+	struct no* dir;	
 } t_no;
 
 typedef struct elemento{
@@ -43,10 +43,10 @@ int estavazia(t_lista* l){
 	return 0;
 }
 
-int removefim(t_lista* l){
+t_no* removefim(t_lista* l){
 	if(estavazia(l)){
 		printf("Lista vazia\n");
-		return -1;
+		return NULL;
 	}
 	t_elemento* ultimo = l -> inicio;
 	t_elemento* penultimo = NULL;
@@ -67,26 +67,6 @@ int removefim(t_lista* l){
 	free(ultimo);
 	return tmp;
 }
-
-
-void mostralista(t_lista* l){
-	if(l -> inicio == NULL){
-		printf("Lista vazia\n");
-	}
-	else{
-		t_elemento* p;
-		int i = 0;
-
-		p = l -> inicio;
-		while(p != NULL){
-			printf("Posicao %d --- valor %d\n", i, p->dado);
-			p = p -> proximo;
-			i++;
-		}
-	}
-	printf("Fim da lista\n");
-}
-
 
 t_lista* crialista(){
 	t_lista* l = (t_lista*)malloc(sizeof(t_lista));
@@ -109,24 +89,15 @@ void enfileira(t_no* no, t_fila* f){
 	insereinicio(no, f->l);
 }
 
-int desenfileira(t_fila* f){
+t_no* desenfileira(t_fila* f){
 	return removefim(f->l);
 }
 
-void filavazia(t_fila* f){
+int filavazia(t_fila* f){
 	if(f->l->inicio == NULL){
 		return 1;
 	}
-	return 0
-}
-
-void mostraFila(t_fila* f){
-	if(filavazia(f)){
-		printf("Fila vazia\n");
-	}
-	else{
-		mostralista(f->l);
-	}
+	return 0;
 }
 
 /*FIM ALGORITMO FILAS*/
@@ -149,18 +120,18 @@ int insereArvore(int v, t_no* r){
 	}
 	if(v > r->raiz){
 		if(r->dir == NULL){
-			r->dir = (t_no*)malloc(sizeof(t_no));
+			r->dir = criaArvore(v);
 		}
 		else{
-			insere(v,r->dir);
+			insereArvore(v,r->dir);
 		}
 	}
 	else{
 		if(r->esq == NULL){
-			r->esq = (t_no*)malloc(sizeof(t_no));
+			r->esq = criaArvore(v);
 		}
 		else{
-			insere(v,r->esq);
+			insereArvore(v,r->esq);
 		}
 	}
 	return 0;
@@ -177,14 +148,15 @@ int mostraArvore(t_no* r){
 	enfileira(r, f);
 	while(!filavazia(f)){
 		no_atual = desenfileira(f);
-		printf("%d\n", no_atual->raiz);
+		printf("%d ", no_atual->raiz);
 		if(no_atual->esq != NULL){
-			enfileira(no_atual->esq);
+			enfileira(no_atual->esq, f);
 		}
 		if(no_atual->dir != NULL){
-			enfileira(no_atual->dir);
+			enfileira(no_atual->dir, f);
 		}
 	}
+	printf("\n");
 	return 0;
 }
 
@@ -194,7 +166,7 @@ int main(){
 	t_no* arvore;
 	int raiz;
 
-	printf("Qual a raiz da arvore binaria de busca que deseja criar?\n")
+	printf("Qual a raiz da arvore binaria de busca que deseja criar?\n");
 	scanf("%d", &raiz);
 	arvore = criaArvore(raiz);
 	printf("Deseja inserir algum valor? (0 caso nao)\n");
