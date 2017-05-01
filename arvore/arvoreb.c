@@ -8,7 +8,7 @@ typedef struct no{
 } t_no;
 
 typedef struct elemento{
-	int dado;
+	t_no* no;
 	struct elemento* proximo;
 } t_elemento;
 
@@ -17,42 +17,22 @@ typedef struct lista{
 	t_elemento* fim;
 } t_lista;
 
-typedef struct pilha{
-	t_lista* l;
-}t_pilha;
-
 typedef struct fila{
 	t_lista* l;
 }t_fila;
 
 /*ALGORITMOS DE LISTA!*/
 
-int insereinicio(int valor, t_lista* l){
+int insereinicio(t_no* no, t_lista* l){
 	t_elemento* nv;
 
 	nv = (t_elemento*)malloc(sizeof(t_elemento)); 
-	nv -> dado = valor;
+	nv->no = no;
 	nv -> proximo = l->inicio;
 	l -> inicio = nv;
 	if(l -> fim == NULL){
 		l -> fim = nv;
 	} 
-	return 0;
-}
-
-int inserefim(int valor, t_lista* l){
-	t_elemento* nv;
-
-	nv = (t_elemento*)malloc(sizeof(t_elemento));
-	nv -> dado = valor;
-	nv -> proximo = NULL;
-	if(l -> inicio == NULL){
-		l -> inicio = nv; 
-	}
-	else{
-		l -> fim -> proximo = nv;
-	}
-	l -> fim = nv;
 	return 0;
 }
 
@@ -63,22 +43,6 @@ int estavazia(t_lista* l){
 	return 0;
 }
 
-int removeinicio(t_lista* l){
-	if(estavazia(l)){
-		printf("Lista vazia\n");
-		return -1;
-	}
-	t_elemento* p = l -> inicio;
-	int tmp = p -> dado;
-
-	l -> inicio = p -> proximo;
-	free(p);
-	if(l -> inicio == NULL){
-		l -> fim = NULL;
-	}
-	return tmp;
-}
-
 int removefim(t_lista* l){
 	if(estavazia(l)){
 		printf("Lista vazia\n");
@@ -86,7 +50,7 @@ int removefim(t_lista* l){
 	}
 	t_elemento* ultimo = l -> inicio;
 	t_elemento* penultimo = NULL;
-	int tmp = l -> fim -> dado;
+	t_no* tmp = l -> fim -> no;
 
 	while(ultimo -> proximo != NULL){
 		penultimo = ultimo;
@@ -123,89 +87,6 @@ void mostralista(t_lista* l){
 	printf("Fim da lista\n");
 }
 
-int inserequalquer(int valor, t_lista* l, int pos){
-	
-	if (pos == 0){
-		insereinicio(valor, l);
-		return 0;
-	}
-	else if( l->inicio == NULL){
-		printf("Posicao invalida\n");
-		return -1;
-	}
-
-	t_elemento* nv = (t_elemento*)malloc(sizeof(t_elemento));
-	t_elemento* ultimo = l->inicio;
-	t_elemento* penultimo = NULL;
-	int i = 0;
-
-	nv->dado = valor;
-	while(i!=pos && ultimo->proximo != NULL){
-		penultimo = ultimo;
-		ultimo = ultimo->proximo;
-		i++;
-	}
-	if(pos==i+1){
-		nv->proximo=NULL;
-		ultimo->proximo=nv;
-		l->fim=nv;
-	}
-	else if(pos==i){
-		penultimo->proximo=nv;
-		nv->proximo=ultimo;
-	}
-	else{
-		printf("Posicao invalida\n");
-		free(nv);
-		return -1;
-	}
-	return 0;
-}
-
-int removequalquer(t_lista* l, int pos){
-	int valor, i = 0;
-
-	if(estavazia(l)){
-		printf("Lista vazia\n");
-		return -1;
-	}
-	else if(pos == 0){
-		valor = removeinicio(l);
-		return valor;
-	}
-
-	t_elemento* ultimo = l->inicio;
-	t_elemento* penultimo = NULL;
-
-	while(i!=pos && ultimo->proximo != NULL){
-		penultimo = ultimo;
-		ultimo = ultimo->proximo;
-		i++;
-	}
-	if(pos==i){
-		penultimo->proximo = ultimo->proximo;
-		valor = ultimo->dado;
-		if(penultimo->proximo == NULL){
-			l->fim = penultimo;
-		}
-		free(ultimo);
-	}
-	else{
-		printf("Posicao invalida\n");
-		return -1;
-	}
-	return valor;
-}
-
-void removetudo(t_lista* l){
-	int tmp;
-
-	while(l->inicio != NULL){
-		tmp = removeinicio(l);
-		printf("Removido %d da posicao 0\n", tmp);
-	}
-	printf("Lista vazia\n");
-}
 
 t_lista* crialista(){
 	t_lista* l = (t_lista*)malloc(sizeof(t_lista));
@@ -224,21 +105,12 @@ t_fila* criafila(){
 	return f;
 }
 
-void enfileira(int valor, t_fila* f){
-	insereinicio(valor, f->l);
+void enfileira(t_no* no, t_fila* f){
+	insereinicio(no, f->l);
 }
 
 int desenfileira(t_fila* f){
 	return removefim(f->l);
-}
-
-void desenfileiraTudo(t_fila* f){
-	int tmp;
-
-	while(f->l->inicio!= NULL){
-		tmp = removefim(f->l);
-		printf("Removido %d\n", tmp);
-	}
 }
 
 void filavazia(t_fila* f){
@@ -294,26 +166,29 @@ int insere(int v, t_no* r){
 	return 0;
 }
 
-int mostra(t_no* r){
+int mostraArvore(t_no* r){
 	if(r == NULL){
 		printf("Arvore vazia\n");
 		return -1;
 	}
 	t_fila* f = criafila();
-	enfileira(r->dado, f);
-	while()
+	t_no* no_atual;
 
+	enfileira(r, f);
+	while(!filavazia(f)){
+		no_atual = desenfileira(f);
+		printf("%d\n", no_atual->raiz);
+		if(no_atual->esq != NULL){
+			enfileira(no_atual->esq);
+		}
+		if(no_atual->dir != NULL){
+			enfileira(no_atual->dir);
+		}
+	}
 	return 0;
 }
 
 /*FIM ALGORITMOS DE ARVORE*/
-
-int mostra(t_no* r){
-	if (r == NULL)
-	{
-		/* code */
-	}
-}
 
 int main(){
 	return 0;
