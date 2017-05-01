@@ -205,7 +205,13 @@ int main(){
 		printf("Deseja inserir algum valor? (0 caso nao)\n");
 		scanf("%d", &raiz);
 	}
-	mostraArvore(arvore);
+	percursoLargura(arvore);
+	printf("\n");
+	percursoPos(arvore);
+	printf("\n");
+	percursoEmOrdem(arvore);
+	printf("\n");
+	percursoPre(arvore);
 	printf("\n");
 	return 0;
 }
