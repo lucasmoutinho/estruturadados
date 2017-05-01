@@ -241,15 +241,21 @@ void desenfileiraTudo(t_fila* f){
 	}
 }
 
-void mostraFila(t_fila* f){
+void filavazia(t_fila* f){
 	if(f->l->inicio == NULL){
+		return 1;
+	}
+	return 0
+}
+
+void mostraFila(t_fila* f){
+	if(filavazia(f)){
 		printf("Fila vazia\n");
 	}
 	else{
 		mostralista(f->l);
 	}
 }
-
 
 /*FIM ALGORITMO FILAS*/
 
