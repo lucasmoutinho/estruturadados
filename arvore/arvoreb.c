@@ -222,6 +222,19 @@ t_no* busca(t_no* r, int valor){
 	return busca(r->dir, valor);
 }
 
+int alturaArvore(t_no* r){
+	if(r == NULL){
+		return 0;
+	}
+	int he, hd;
+	he = alturaArvore(r->esq);
+	hd = alturaArvore(r->dir);
+	if(he>hd){
+		return he+1;
+	}
+	return hd+1;
+}
+
 /*FIM ALGORITMOS DE ARVORE*/
 
 int main(){
@@ -247,6 +260,7 @@ int main(){
 	printf("\n");
 	percursoPre(arvore);
 	printf("\n");
+	printf("Altura arvore = %d\n", alturaArvore(arvore));
 	printf("Qual valor deseja procura?\n");
 	scanf("%d", &valor);
 	arvore2 = busca(arvore, valor);
