@@ -169,6 +169,16 @@ int percursoPre(t_no* r){
 	return 0;
 }
 
+int percursoPos(t_no* r){
+	if(r == NULL){
+		return 0;;
+	}
+	percursoPos(r->esq);
+	percursoPos(r->dir);
+	printf("%d ", r->raiz);
+	return 0;
+}
+
 /*FIM ALGORITMOS DE ARVORE*/
 
 int main(){
