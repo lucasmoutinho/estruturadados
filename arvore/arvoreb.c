@@ -142,7 +142,7 @@ t_no* criaArvore(int raiz){
 	return no; 
 }
 
-int insere(int v, t_no* r){
+int insereArvore(int v, t_no* r){
 	if(r == NULL || r->raiz == v){
 		printf("Erro, arvore vazia ou elemento ja inserido\n");
 		return -1;
@@ -191,5 +191,19 @@ int mostraArvore(t_no* r){
 /*FIM ALGORITMOS DE ARVORE*/
 
 int main(){
+	t_no* arvore;
+	int raiz;
+
+	printf("Qual a raiz da arvore binaria de busca que deseja criar?\n")
+	scanf("%d", &raiz);
+	arvore = criaArvore(raiz);
+	printf("Deseja inserir algum valor? (0 caso nao)\n");
+	scanf("%d", &raiz);
+	while(raiz!=0){
+		insereArvore(raiz, arvore);
+		printf("Deseja inserir algum valor? (0 caso nao)\n");
+		scanf("%d", &raiz);
+	}
+	mostraArvore(arvore);
 	return 0;
 }
