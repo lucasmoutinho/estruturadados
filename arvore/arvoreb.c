@@ -209,11 +209,25 @@ int removeArvore(t_no** r){
 	return 0;
 }
 
+t_no* busca(t_no* r, int valor){
+	if(r == NULL){
+		return NULL;
+	}
+	if(r->raiz == valor){
+		return r; 
+	}
+	if (valor < r->raiz){
+		return busca(r->esq, valor);
+	}
+	return busca(r->dir, valor);
+}
+
 /*FIM ALGORITMOS DE ARVORE*/
 
 int main(){
 	t_no* arvore;
-	int raiz;
+	t_no* arvore2;
+	int raiz, valor;
 
 	printf("Qual a raiz da arvore binaria de busca que deseja criar?\n");
 	scanf("%d", &raiz);
@@ -233,8 +247,16 @@ int main(){
 	printf("\n");
 	percursoPre(arvore);
 	printf("\n");
+	printf("Qual valor deseja procura?\n");
+	scanf("%d", &valor);
+	arvore2 = busca(arvore, valor);
+	if (arvore2 == NULL){
+		printf("Valor nao encontrado\n");
+	}
+	else{
+		printf("No com valor %d encontrado\n", arvore2->raiz);
+	}
 	removeArvore(&arvore);
 	percursoLargura(arvore);
-	printf("\n");
 	return 0;
 }
