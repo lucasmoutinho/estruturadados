@@ -189,6 +189,26 @@ int percursoEmOrdem(t_no* r){
 	return 0;
 }
 
+int esvaziaArvore(t_no* r){
+	if(r == NULL){
+		return 0;
+	}
+	esvaziaArvore(r->esq);
+	esvaziaArvore(r->dir);
+	free(r);
+	return 0;
+}
+
+int removeArvore(t_no** r){
+	if(*r == NULL){
+		printf("Arvore vazia\n");
+		return 0;
+	}
+	esvaziaArvore(*r);
+	*r = NULL;
+	return 0;
+}
+
 /*FIM ALGORITMOS DE ARVORE*/
 
 int main(){
@@ -212,6 +232,9 @@ int main(){
 	percursoEmOrdem(arvore);
 	printf("\n");
 	percursoPre(arvore);
+	printf("\n");
+	removeArvore(&arvore);
+	percursoLargura(arvore);
 	printf("\n");
 	return 0;
 }
