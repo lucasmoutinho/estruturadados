@@ -19,7 +19,7 @@ typedef struct fila{
 	t_lista* l;
 }t_fila;
 
-/*ALGORITMOS DE LISTA*/
+/*ALGORITMOS DE LISTA!*/
 
 int insereinicio(int valor, t_lista* l){
 	t_elemento* nv;
