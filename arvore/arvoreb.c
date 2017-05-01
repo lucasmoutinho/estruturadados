@@ -179,6 +179,16 @@ int percursoPos(t_no* r){
 	return 0;
 }
 
+int percursoEmOrdem(t_no* r){
+	if(r == NULL){
+		return 0;
+	}
+	percursoEmOrdem(r->esq);
+	printf("%d ", r->raiz);
+	percursoEmOrdem(r->dir);
+	return 0;
+}
+
 /*FIM ALGORITMOS DE ARVORE*/
 
 int main(){
