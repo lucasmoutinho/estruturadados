@@ -106,7 +106,76 @@ int insereArvore(int v, t_no** r){
 	return 0;
 }
 
+t_no* procuraMenor(t_no* no){
+	t_no* atual = no;
+	t_no* prox = atual->esq;
+	while(prox != NULL){
+		atual = prox;
+		prox = prox->esq;
+	}
+	return atual;
+}
 
+int removeArvore(int v, t_no** r){
+	if(*r == NULL){
+		return 0;
+	}
+	if(v < (*r)->raiz){
+		if(removeArvore(v,&((*r)->esq))){
+			(*r)->fb = alturaArvore((*r)->dir) - alturaArvore((*r)->esq);
+			if((*r)->fb >= 2){
+				if((*r)->esq->fb >= 1){
+					*r = rotacionaLL(*r);
+				}
+				else{
+					*r = rotacionaLR(*r);
+				}
+			}
+			return 1;
+		}
+		return 0;
+	}
+	else if(v > (*r)->raiz){
+		if(removeArvore(v,&((*r)->dir))){
+			(*r)->fb = alturaArvore((*r)->dir) - alturaArvore((*r)->esq);
+			if((*r)->fb <= -2){
+				if((*r)->esq->fb <= -1){
+					*r = rotacionaRR(*r);
+				}
+				else{
+					*r = rotacionaRL(*r);
+				}
+			}
+			return 1;
+		}
+		return 0;
+	}
+	if((*r)->esq == NULL || (*r)->dir == NULL){
+		t_no* old = *r;
+		if((*r)->dir == NULL){
+			*r = (*r)->esq;
+		}
+		else{
+			*r = (*r)->dir;
+		}
+		free(old);
+	}
+	else{
+		t_no* temp = procuraMenor((*r)->dir);
+		(*r)->raiz = temp->raiz;
+		removeArvore(temp->raiz,&((*r)->dir));
+		(*r)->fb = alturaArvore((*r)->dir) - alturaArvore((*r)->esq);
+		if((*r)->fb <= -2){
+			if((*r)->esq->fb <= -1){
+				*r = rotacionaRR(*r);
+			}
+			else{
+				*r = rotacionaRL(*r);
+			}
+		}
+	}
+	return 1;
+}
 
 int percursoPos(t_no* r){
 	if(r==NULL){
@@ -147,6 +216,15 @@ int main(){
 	percursoPos(raiz);
 	printf("balanceada: %d\n", balanceada(raiz));
 	insereArvore(3, &raiz);
+	percursoPos(raiz);
+	printf("balanceada: %d\n", balanceada(raiz));
+	removeArvore(2, &raiz);
+	percursoPos(raiz);
+	printf("balanceada: %d\n", balanceada(raiz));
+	removeArvore(6, &raiz);
+	percursoPos(raiz);
+	printf("balanceada: %d\n", balanceada(raiz));
+	removeArvore(5, &raiz);
 	percursoPos(raiz);
 	printf("balanceada: %d\n", balanceada(raiz));
 	return 0;
