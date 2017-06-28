@@ -37,6 +37,38 @@ void insertion_sort_reversed(int a[],int n){
 	}
 }
 
+void bubble_sort_ordened(int a[], int n){
+	int houvetroca = 1, i = 0, j, aux;
+	while(i<n-1 && houvetroca){
+		houvetroca = 0;
+		for(j=0; j< n-1; j++){
+			if(a[j+1] > a[j]){
+				aux = a[j];
+				a[j] = a[j+1];
+				a[j+1] = aux;
+				houvetroca = 1;
+			}
+		}
+		i++;
+	}
+}
+
+void bubble_sort_reversed(int a[], int n){
+	int houvetroca = 1, i = 0, j, aux;
+	while(i<n-1 && houvetroca){
+		houvetroca = 0;
+		for(j=0; j< n-1; j++){
+			if(a[j+1] < a[j]){
+				aux = a[j];
+				a[j] = a[j+1];
+				a[j+1] = aux;
+				houvetroca = 1;
+			}
+		}
+		i++;
+	}
+}
+
 void setaValor(int *a){
 	a[0] = 7;
 	a[1] = 2;
@@ -58,6 +90,10 @@ int main(){
 	insertion_sort_reversed(a,10);
 	mostraVetor(a,10);
 	setaValor(a);
+	mostraVetor(a,10);
+	bubble_sort_ordened(a,10);
+	mostraVetor(a,10);
+	bubble_sort_reversed(a,10);
 	mostraVetor(a,10);
 	return 0;
 }
