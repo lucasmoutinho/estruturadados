@@ -99,6 +99,38 @@ void selection_sort_reversed(int a[], int n){
 	}
 }
 
+int particiona(int a[], int inicio, int fim){
+	int esquerda, direita, pivo, aux;
+	esquerda = inicio;
+	direita = fim;
+	pivo = a[inicio];
+	while(esquerda < direita){
+		while(a[esquerda]<=pivo){
+			esquerda++;
+		}
+		while(a[direita]>pivo){
+			direita--;
+		}
+		if(esquerda<direita){
+			aux = a[esquerda];
+			a[esquerda] = a[direita];
+			a[direita] = aux;
+		}
+	}
+	a[inicio] = a[direita];
+	a[direita] = pivo;
+	return direita;
+}
+
+void quicksort(int a[], int inicio, int fim){
+	int pivo;
+	if(fim>inicio){
+		pivo = particiona(a,inicio,fim);
+		quicksort(a,inicio,pivo-1);
+		quicksort(a,pivo+1,fim);
+	}
+}
+
 void setaValor(int *a){
 	a[0] = 7;
 	a[1] = 2;
@@ -130,6 +162,10 @@ int main(){
 	selection_sort_reversed(a,10);
 	mostraVetor(a,10);
 	selection_sort_ordened(a,10);
+	mostraVetor(a,10);
+	setaValor(a);
+	mostraVetor(a,10);
+	quicksort(a,0,9);
 	mostraVetor(a,10);
 	return 0;
 }
