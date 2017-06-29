@@ -131,6 +131,61 @@ void quicksort(int a[], int inicio, int fim){
 	}
 }
 
+void merge(int a[],int inicio,int meio,int fim){
+	int* temp;
+	int p1, p2, tam, i, j, k, fim1 = 0, fim2 = 0;
+	tam = fim - inicio + 1;
+	p1 = inicio;
+	p2 = meio+1;
+	temp = (int*)malloc(sizeof(int)*tam);
+	if(temp != NULL){
+		for(i=0;i<tam;i++){
+			if(!fim1 && !fim2){
+				if(a[p1] < a[p2]){
+					temp[i] = a[p1];
+					p1++;
+				}
+				else{
+					temp[i] = a[p2];
+					p2++;
+				}
+				if(p1 > meio){
+					fim1 = 1;
+				}
+				if(p2 > fim){
+					fim2 = 1;
+				}
+			}
+			else{
+				if(!fim1){
+					temp[i] = a[p1];
+					p1++;
+				}
+				else{
+					temp[i] = a[p2];
+					p2++;
+				}
+			}
+		}
+	}
+	k = inicio;
+	for(j=0;j<tam;j++){
+		a[k] = temp[j];
+		k++;
+	}
+	free(temp);
+}
+
+void mergesort(int a[],int inicio, int fim){
+	int meio;
+	if(inicio < fim){
+		meio = (inicio+fim)/2;
+		mergesort(a,inicio, meio);
+		mergesort(a,meio+1, fim);
+		merge(a,inicio,meio,fim);
+	}
+}
+
 void setaValor(int *a){
 	a[0] = 7;
 	a[1] = 2;
@@ -166,6 +221,10 @@ int main(){
 	setaValor(a);
 	mostraVetor(a,10);
 	quicksort(a,0,9);
+	mostraVetor(a,10);
+	setaValor(a);
+	mostraVetor(a,10);
+	mergesort(a,0,9);
 	mostraVetor(a,10);
 	return 0;
 }
